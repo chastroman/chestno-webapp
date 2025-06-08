@@ -146,5 +146,28 @@
         document.getElementById('guide-screen').classList.add('hidden');
       }
     </script>
+    <script>
+  Telegram.WebApp.ready();
+  const user = Telegram.WebApp.initDataUnsafe?.user;
+  if (user) {
+    document.getElementById('tg-id').textContent = `ID: ${user.id}`;
+    document.getElementById('tg-username').textContent = `Username: @${user.username || 'нет'}`;
+    document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+    if (user.photo_url) {
+      document.getElementById('tg-photo').src = user.photo_url;
+    } else {
+      document.getElementById('tg-photo').style.display = 'none';
+    }
+  } else {
+    document.getElementById('tg-id').textContent = `Нет данных пользователя`;
+  }
+</script>
   </body>
+    <div style="margin-bottom: 20px;">
+  <h2>Ваши данные Telegram:</h2>
+  <p id="tg-id">ID: —</p>
+  <p id="tg-username">Username: —</p>
+  <p id="tg-name">Имя: —</p>
+  <img id="tg-photo" style="margin-top: 20px; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+</div>
 </html>
