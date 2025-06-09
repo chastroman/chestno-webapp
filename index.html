@@ -1,193 +1,193 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>честно</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    :root {
-      --bg-color: var(--tg-theme-bg-color, #fdfcf9);
-      --text-color: var(--tg-theme-text-color, #0f0f0f);
-      --hint-color: var(--tg-theme-hint-color, #888);
-      --button-color: var(--tg-theme-button-color, #0f0f0f);
-      --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
-      --secondary-bg-color: var(--tg-theme-secondary-bg-color, #ffffff);
-    }
-    body {
-      background: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 24px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 32px;
-    }
-    .button {
-      background-color: var(--button-color);
-      color: var(--button-text-color);
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 16px;
-      margin: 10px 0;
-      width: 100%;
-      max-width: 320px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
-    .button.outline {
-      background: transparent;
-      color: var(--text-color);
-      border: 2px solid var(--text-color);
-    }
-    .input-field {
-      width: 100%;
-      max-width: 320px;
-      padding: 14px;
-      margin-bottom: 16px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-      background: #fff;
-      color: var(--text-color);
-    }
-    .footer {
-      font-size: 13px;
-      color: var(--hint-color);
-      margin-top: 40px;
-    }
-    .hidden {
-      display: none;
-    }
-    .profile-card {
-      display: flex;
-      align-items: center;
-      background: var(--secondary-bg-color);
-      padding: 16px;
-      border-radius: 16px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 24px;
-      width: 100%;
-      max-width: 320px;
-    }
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 16px;
-    }
-    .user-info {
-      text-align: left;
-    }
-    .user-info h2 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .user-info p {
-      margin: 4px 0 0 0;
-      font-size: 14px;
-      color: var(--hint-color);
-    }
-  </style>
-</head>
-<body>
-  <h1>честно</h1>
-  <div id="home-screen">
-    <button class="button" onclick="showDealScreen()">Создать сделку</button>
-    <button class="button" onclick="showProfileScreen()">Личный кабинет</button>
-    <button class="button" onclick="showGuideScreen()">Как это работает</button>
-  </div>
-  <div id="deal-screen" class="hidden">
-    <input type="text" class="input-field" placeholder="@username участника" />
-    <input type="text" class="input-field" placeholder="Описание сделки" />
-    <input type="text" class="input-field" placeholder="Сумма (TON / USDT / ₽)" />
-    <button class="button" onclick="Telegram.WebApp.MainButton.show(); Telegram.WebApp.MainButton.setText('Подтвердить сделку');">Отправить приглашение</button>
-    <button class="button outline" onclick="showHomeScreen()">Назад</button>
-  </div>
-  <div id="profile-screen" class="hidden">
-    <div class="profile-card">
-      <img id="tg-photo" class="avatar" src="" alt="Avatar" />
-      <div class="user-info">
-        <h2 id="tg-name">Имя</h2>
-        <p id="tg-username">@username</p>
-        <p id="tg-id">ID: 123456789</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>честно</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+      :root {
+        --bg-color: var(--tg-theme-bg-color, #fdfcf9);
+        --text-color: var(--tg-theme-text-color, #0f0f0f);
+        --hint-color: var(--tg-theme-hint-color, #888);
+        --button-color: var(--tg-theme-button-color, #0f0f0f);
+        --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
+      }
+      body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 24px;
+        text-align: center;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 32px;
+      }
+      .button {
+        background-color: var(--button-color);
+        color: var(--button-text-color);
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        font-size: 16px;
+        margin: 10px 0;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+      }
+      .input-field {
+        width: 100%;
+        max-width: 320px;
+        padding: 14px;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        background: #fff;
+        color: var(--text-color);
+      }
+      .footer {
+        font-size: 13px;
+        color: var(--hint-color);
+        margin-top: 40px;
+      }
+      .hidden {
+        display: none;
+      }
+      .card {
+        display: flex;
+        align-items: center;
+        background-color: var(--secondary-bg-color);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 16px;
+      }
+      .user-info {
+        text-align: left;
+      }
+      .user-info p {
+        margin: 4px 0;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>честно</h1>
+    <div id="home-screen">
+      <button class="button" onclick="showDealScreen()">Создать сделку</button>
+      <button class="button" onclick="showProfileScreen()">Личный кабинет</button>
+      <button class="button" onclick="showGuideScreen()">Как это работает</button>
+    </div>
+    <div id="deal-screen" class="hidden">
+      <input type="text" id="deal-username" class="input-field" placeholder="@username участника" />
+      <input type="text" id="deal-description" class="input-field" placeholder="Описание сделки" />
+      <input type="text" id="deal-amount" class="input-field" placeholder="Сумма (TON / USDT / ₽)" />
+      <button class="button" onclick="sendInvite()">Отправить приглашение</button>
+      <button class="button" onclick="showHomeScreen()">Назад</button>
+    </div>
+    <div id="profile-screen" class="hidden">
+      <div class="card">
+        <img id="tg-photo" class="avatar" src="" alt="avatar" />
+        <div class="user-info">
+          <p id="tg-name">Имя: —</p>
+          <p id="tg-username">Username: —</p>
+        </div>
+      </div>
+      <button class="button">Мои сделки</button>
+      <button class="button">NFC-паспорт</button>
+      <button class="button">Перейти в TON Wallet</button>
+      <button class="button" onclick="showHomeScreen()">Назад</button>
+    </div>
+    <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 20px; text-align: left;">
+      <h2 style="font-size: 22px; margin-bottom: 24px; font-weight: 600;">Как работает сервис «Честно»</h2>
+      <p style="font-size: 16px; margin-bottom: 20px; line-height: 1.6;">
+        «Честно» — это прозрачный способ договориться и получить оплату, даже если вы не знакомы с человеком лично. Вся логика сделки строится внутри Telegram, без регистрации и посредников.
+      </p>
+      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>1. Инициатор создаёт сделку</strong><br/>
+        Указывает @username второго участника, краткое описание и сумму.</p>
+      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>2. Согласование условий</strong><br/>
+        Можно загрузить переписку, оферту, примеры работ. AI помогает составить договор на основе этих данных.</p>
+      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>3. Заморозка средств</strong><br/>
+        После согласования условий деньги временно блокируются. Исполнитель начинает работу.</p>
+      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>4. Завершение</strong><br/>
+        После выполнения работы стороны подтверждают завершение и происходит оплата.</p>
+      <p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
+        «Честно» — для фрилансеров, самозанятых, бизнеса и всех, кто хочет работать честно и безопасно.
+      </p>
+      <div style="display: flex; justify-content: center; margin-top: 32px;">
+        <button class="button" onclick="showHomeScreen()">Назад</button>
       </div>
     </div>
-    <button class="button">Мои сделки</button>
-    <button class="button">NFC-паспорт</button>
-    <button class="button">Перейти в TON Wallet</button>
-    <button class="button outline" onclick="showHomeScreen()">Назад</button>
-  </div>
-  <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 20px; text-align: left;">
-    <h2 style="font-size: 22px; margin-bottom: 24px; font-weight: 600;">Как работает сервис «Честно»</h2>
-    <p style="font-size: 16px; margin-bottom: 20px; line-height: 1.6;">
-      «Честно» — это прозрачный способ договориться и получить оплату, даже если вы не знакомы с человеком лично. Вся логика сделки строится внутри Telegram, без регистрации и посредников.
-    </p>
-    <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>1. Инициатор создаёт сделку</strong><br/>
-      Он указывает @username второго участника, краткое описание и сумму. Сделка отправляется собеседнику в виде WebApp.</p>
-    <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>2. Стороны обсуждают условия</strong><br/>
-      Можно загрузить переписку, оферту, примеры работ. AI помогает составить корректный договор на основе переписки или шаблонов.</p>
-    <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>3. Деньги замораживаются</strong><br/>
-      После согласования условий сумма временно блокируется в TON, USDT или ₽. Исполнитель начинает работу.</p>
-    <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>4. Завершение сделки</strong><br/>
-      Если работа выполнена, обе стороны подтверждают завершение — и средства переходят исполнителю. Если одна сторона молчит, сделка закрывается автоматически через 48 часов.</p>
-    <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>5. В случае спора — арбитраж</strong><br/>
-      AI анализирует договор, переписку и доказательства. Решение выносит платформа, ориентируясь на зафиксированные условия. Это защищает обе стороны.</p>
-    <p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
-      «Честно» подходит для фрилансеров, самозанятых, бизнесов и обычных людей. Сделка здесь — это не просто перевод, а защищённая договорённость.
-    </p>
-    <div style="display: flex; justify-content: center; margin-top: 32px;">
-      <button class="button outline" onclick="showHomeScreen()">Назад</button>
-    </div>
-  </div>
-  <div class="footer">chestno.online · сервис безопасной сделки</div>
-  <script>
-    Telegram.WebApp.ready();
-    Telegram.WebApp.expand();
-    function showDealScreen() {
-      hideAll();
-      document.getElementById('deal-screen').classList.remove('hidden');
-    }
-    function showProfileScreen() {
-      hideAll();
-      const user = Telegram.WebApp.initDataUnsafe?.user;
-      if (user) {
-        document.getElementById('tg-name').textContent = user.first_name || 'Имя';
-        document.getElementById('tg-username').textContent = '@' + (user.username || 'username');
-        document.getElementById('tg-id').textContent = 'ID: ' + (user.id || '123456789');
-        if (user.photo_url) {
-          document.getElementById('tg-photo').src = user.photo_url;
-        }
+    <div class="footer">chestno.online · сервис безопасной сделки</div>
+    <script>
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      function showDealScreen() {
+        hideAll();
+        document.getElementById('deal-screen').classList.remove('hidden');
       }
-      document.getElementById('profile-screen').classList.remove('hidden');
-    }
-    function showGuideScreen() {
-      hideAll();
-      document.getElementById('guide-screen').classList.remove('hidden');
-    }
-    function showHomeScreen() {
-      hideAll();
-      document.getElementById('home-screen').classList.remove('hidden');
-      Telegram.WebApp.MainButton.hide();
-    }
-    function hideAll() {
-      document.getElementById('home-screen').classList.add('hidden');
-      document.getElementById('deal-screen').classList.add('hidden');
-      document.getElementById('profile-screen').classList.add('hidden');
-      document.getElementById('guide-screen').classList.add('hidden');
-    }
-  </script>
-</body>
+      function showProfileScreen() {
+        hideAll();
+        const user = Telegram.WebApp.initDataUnsafe?.user;
+        if (user) {
+          document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+          document.getElementById('tg-username').textContent = `@${user.username || 'нет'}`;
+          if (user.photo_url) {
+            document.getElementById('tg-photo').src = user.photo_url;
+          } else {
+            document.getElementById('tg-photo').style.display = 'none';
+          }
+        }
+        document.getElementById('profile-screen').classList.remove('hidden');
+      }
+      function showGuideScreen() {
+        hideAll();
+        document.getElementById('guide-screen').classList.remove('hidden');
+      }
+      function showHomeScreen() {
+        hideAll();
+        document.getElementById('home-screen').classList.remove('hidden');
+        Telegram.WebApp.MainButton.hide();
+      }
+      function hideAll() {
+        document.getElementById('home-screen').classList.add('hidden');
+        document.getElementById('deal-screen').classList.add('hidden');
+        document.getElementById('profile-screen').classList.add('hidden');
+        document.getElementById('guide-screen').classList.add('hidden');
+      }
+      function sendInvite() {
+        const username = document.querySelector('#deal-username').value.trim().replace('@', '');
+        const description = document.querySelector('#deal-description').value.trim();
+        const amount = document.querySelector('#deal-amount').value.trim();
+        if (!username || !description || !amount) {
+          alert('Пожалуйста, заполните все поля.');
+          return;
+        }
+        const text = `👋 Привет! Приглашаю тебя заключить сделку в «Честно»:\n\nОписание: ${description}\nСумма: ${amount}\n\nПерейди в WebApp и подтверди сделку 👉 https://chestno.online`;
+        const link = `https://t.me/${username}`;
+        window.open(link, '_blank');
+        alert(`Скопируй и отправь текст приглашения:\n\n${text}`);
+      }
+    </script>
+  </body>
 </html>
