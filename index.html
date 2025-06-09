@@ -6,22 +6,20 @@
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-       :root {
-  --bg-color: var(--tg-theme-bg-color, #fdfcf9);
-  --text-color: var(--tg-theme-text-color, #0f0f0f);
-  --hint-color: var(--tg-theme-hint-color, #888);
-  --button-color: var(--tg-theme-button-color, #0f0f0f);
-  --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
-  --secondary-bg-color: var(--tg-theme-secondary-bg-color, #0f0f0f);
+      :root {
+        --bg-color: var(--tg-theme-bg-color, #fdfcf9);
+        --text-color: var(--tg-theme-text-color, #0f0f0f);
+        --hint-color: var(--tg-theme-hint-color, #888);
+        --button-color: var(--tg-theme-button-color, #0f0f0f);
+        --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
+        --secondary-bg-color: var(--tg-theme-secondary-bg-color, #0f0f0f);
       }
       body {
         background: var(--bg-color);
         color: var(--text-color);
         margin: 0;
         padding: 0;
-        background: var(--bg-color);
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: var(--text-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -97,7 +95,8 @@
       </p>
       <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>1. Инициатор создаёт сделку</strong><br/>
         Он указывает @username второго участника, краткое описание и сумму. Сделка отправляется собеседнику в виде WebApp.</p>
-      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>2. Стороны обсуждают условия</strong><br/>
+      <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>2.
+        Стороны обсуждают условия</strong><br/>
         Можно загрузить переписку, оферту, примеры работ. AI помогает составить корректный договор на основе переписки или шаблонов.</p>
       <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>3. Деньги замораживаются</strong><br/>
         После согласования условий сумма временно блокируется в TON, USDT или ₽. Исполнитель начинает работу.</p>
@@ -105,12 +104,19 @@
         Если работа выполнена, обе стороны подтверждают завершение — и средства переходят исполнителю. Если одна сторона молчит, сделка закрывается автоматически через 48 часов.</p>
       <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>5. В случае спора — арбитраж</strong><br/>
         AI анализирует договор, переписку и доказательства. Решение выносит платформа, ориентируясь на зафиксированные условия. Это защищает обе стороны.</p>
-<p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
+      <p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
         «Честно» подходит для фрилансеров, самозанятых, бизнесов и обычных людей. Сделка здесь — это не просто перевод, а защищённая договорённость.
       </p>
       <div style="display: flex; justify-content: center; margin-top: 32px;">
-  <button class="button" onclick="showHomeScreen()">Назад</button>
-</div>
+        <button class="button" onclick="showHomeScreen()">Назад</button>
+      </div>
+    </div>
+    <div style="margin-top: 30px;">
+      <h2>Ваши данные Telegram:</h2>
+      <p id="tg-id">ID: —</p>
+      <p id="tg-username">Username: —</p>
+      <p id="tg-name">Имя: —</p>
+      <img id="tg-photo" style="margin-top: 20px; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
     </div>
     <div class="footer">chestno.online · сервис безопасной сделки</div>
     <script>
@@ -124,7 +130,7 @@
         hideAll();
         const user = Telegram.WebApp.initDataUnsafe?.user;
         if (user) {
-          document.getElementById('tg-id-text').textContent = `Ваш Telegram ID: ${user.id}`;
+          document.getElementById('tg-id-text').textContent = Ваш Telegram ID: ${user.id};
         } else {
           document.getElementById('tg-id-text').textContent = 'Telegram ID не определён';
         }
@@ -145,29 +151,19 @@
         document.getElementById('profile-screen').classList.add('hidden');
         document.getElementById('guide-screen').classList.add('hidden');
       }
+      const user = Telegram.WebApp.initDataUnsafe?.user;
+      if (user) {
+        document.getElementById('tg-id').textContent = ID: ${user.id};
+        document.getElementById('tg-username').textContent = Username: @${user.username || 'нет'};
+        document.getElementById('tg-name').textContent = ${user.first_name || ''} ${user.last_name || ''}.trim();
+        if (user.photo_url) {
+          document.getElementById('tg-photo').src = user.photo_url;
+        } else {
+          document.getElementById('tg-photo').style.display = 'none';
+        }
+      } else {
+        document.getElementById('tg-id').textContent = Нет данных пользователя;
+      }
     </script>
-    <script>
-  Telegram.WebApp.ready();
-  const user = Telegram.WebApp.initDataUnsafe?.user;
-  if (user) {
-    document.getElementById('tg-id').textContent = `ID: ${user.id}`;
-    document.getElementById('tg-username').textContent = `Username: @${user.username || 'нет'}`;
-    document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
-    if (user.photo_url) {
-      document.getElementById('tg-photo').src = user.photo_url;
-    } else {
-      document.getElementById('tg-photo').style.display = 'none';
-    }
-  } else {
-    document.getElementById('tg-id').textContent = `Нет данных пользователя`;
-  }
-</script>
   </body>
-    <div style="margin-bottom: 20px;">
-  <h2>Ваши данные Telegram:</h2>
-  <p id="tg-id">ID: —</p>
-  <p id="tg-username">Username: —</p>
-  <p id="tg-name">Имя: —</p>
-  <img id="tg-photo" style="margin-top: 20px; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
-</div>
 </html>
