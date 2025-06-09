@@ -6,22 +6,20 @@
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-       :root {
-  --bg-color: var(--tg-theme-bg-color, #fdfcf9);
-  --text-color: var(--tg-theme-text-color, #0f0f0f);
-  --hint-color: var(--tg-theme-hint-color, #888);
-  --button-color: var(--tg-theme-button-color, #0f0f0f);
-  --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
-  --secondary-bg-color: var(--tg-theme-secondary-bg-color, #0f0f0f);
+      :root {
+        --bg-color: var(--tg-theme-bg-color, #fdfcf9);
+        --text-color: var(--tg-theme-text-color, #0f0f0f);
+        --hint-color: var(--tg-theme-hint-color, #888);
+        --button-color: var(--tg-theme-button-color, #0f0f0f);
+        --button-text-color: var(--tg-theme-button-text-color, #fdfcf9);
+        --secondary-bg-color: var(--tg-theme-secondary-bg-color, #0f0f0f);
       }
       body {
         background: var(--bg-color);
         color: var(--text-color);
         margin: 0;
         padding: 0;
-        background: var(--bg-color);
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: var(--text-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -67,6 +65,16 @@
       .hidden {
         display: none;
       }
+      #profile-info {
+        margin-top: 20px;
+      }
+      #profile-info img {
+        margin-top: 20px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     </style>
   </head>
   <body>
@@ -84,7 +92,12 @@
       <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
     <div id="profile-screen" class="hidden">
-      <p id="tg-id-text" style="margin-bottom: 24px; font-size: 16px;"></p>
+      <div id="profile-info">
+        <p id="tg-id"></p>
+        <p id="tg-username"></p>
+        <p id="tg-name"></p>
+        <img id="tg-photo" style="display: none;" />
+      </div>
       <button class="button">Мои сделки</button>
       <button class="button">NFC-паспорт</button>
       <button class="button">Перейти в TON Wallet</button>
@@ -105,12 +118,12 @@
         Если работа выполнена, обе стороны подтверждают завершение — и средства переходят исполнителю. Если одна сторона молчит, сделка закрывается автоматически через 48 часов.</p>
       <p style="font-size: 16px; margin-bottom: 16px; line-height: 1.6;"><strong>5. В случае спора — арбитраж</strong><br/>
         AI анализирует договор, переписку и доказательства. Решение выносит платформа, ориентируясь на зафиксированные условия. Это защищает обе стороны.</p>
-<p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
+      <p style="font-size: 16px; margin-top: 24px; line-height: 1.6;">
         «Честно» подходит для фрилансеров, самозанятых, бизнесов и обычных людей. Сделка здесь — это не просто перевод, а защищённая договорённость.
       </p>
       <div style="display: flex; justify-content: center; margin-top: 32px;">
-  <button class="button" onclick="showHomeScreen()">Назад</button>
-</div>
+        <button class="button" onclick="showHomeScreen()">Назад</button>
+      </div>
     </div>
     <div class="footer">chestno.online · сервис безопасной сделки</div>
     <script>
@@ -124,9 +137,18 @@
         hideAll();
         const user = Telegram.WebApp.initDataUnsafe?.user;
         if (user) {
-          document.getElementById('tg-id-text').textContent = `Ваш Telegram ID: ${user.id}`;
+          document.getElementById('tg-id').textContent = `ID: ${user.id}`;
+          document.getElementById('tg-username').textContent = `Username: @${user.username || 'нет'}`;
+          document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+          if (user.photo_url) {
+            const photo = document.getElementById('tg-photo');
+            photo.src = user.photo_url;
+            photo.style.display = 'block';
+          } else {
+            document.getElementById('tg-photo').style.display = 'none';
+          }
         } else {
-          document.getElementById('tg-id-text').textContent = 'Telegram ID не определён';
+          document.getElementById('tg-id').textContent = `Нет данных пользователя`;
         }
         document.getElementById('profile-screen').classList.remove('hidden');
       }
