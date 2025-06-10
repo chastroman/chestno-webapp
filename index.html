@@ -174,19 +174,6 @@
         document.getElementById('profile-screen').classList.add('hidden');
         document.getElementById('guide-screen').classList.add('hidden');
       }
-      function sendInvite() {
-        const username = document.querySelector('#deal-username').value.trim().replace('@', '');
-        const description = document.querySelector('#deal-description').value.trim();
-        const amount = document.querySelector('#deal-amount').value.trim();
-        if (!username || !description || !amount) {
-          alert('Пожалуйста, заполните все поля.');
-          return;
-        }
-        const text = `👋 Привет! Приглашаю тебя заключить сделку в «Честно»:\n\nОписание: ${description}\nСумма: ${amount}\n\nПерейди в WebApp и подтверди сделку 👉 https://chestno.online`;
-        const link = `https://t.me/${username}`;
-        window.open(link, '_blank');
-        alert(`Скопируй и отправь текст приглашения:\n\n${text}`);
-      }
     </script>
   </body>
 </html>
