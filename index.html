@@ -6,12 +6,13 @@
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script type="module">
-      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js";
+      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest";
 
       const tonConnectUI = new TonConnectUI({
         manifestUrl: "https://chestno.online/tonconnect-manifest.json",
         buttonRootId: "ton-connect-button"
       });
+      window.tonConnectUI = tonConnectUI ;
     </script>
       <style>
       :root {
@@ -187,8 +188,13 @@
   window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
 }
   async function connectTonWallet() {
-    alert("Вы можете подключить свой криптокошелек TON для цифрового удостоверения.");
-  }
+const connectedWallet = await window.tonConnectUI.connected;
+    if (connectedWallet) {
+      alert(`Кошелек подключён: ${connectedWallet.account.address}`);
+    } else {
+      console.log("Ожидаем подключения TON...");
+    }
+    }
     </script>
   </body>
 </html>
