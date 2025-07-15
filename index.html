@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const tonConnectUI = new TonConnectUI({
-      manifestUrl: "https://chestno.online/tonconnect-manifest.json",
-      buttonRootId: "ton-connect-button"
-    });
-    window.tonConnectUI = tonConnectUI;
-  });
-</script>
+    <script type="module">
+      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js";
+
+      const tonConnectUI = new TonConnectUI({
+        manifestUrl: "https://chestno.online/tonconnect-manifest.json",
+        buttonRootId: "ton-connect-button"
+      });
+    </script>
       <style>
       :root {
         --bg-color: var(--tg-theme-bg-color, #fdfcf9);
@@ -159,7 +157,7 @@
         hideAll();
         const user = Telegram.WebApp.initDataUnsafe?.user;
         if (user) {
-          document.getElementById('tg-name').textContent = ${user.first_name || ''} ${user.last_name || ''}.trim();
+          document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
           document.getElementById('tg-username').textContent = `@${user.username || 'нет'}`;
            document.getElementById('tg-id').textContent = `ID: ${user.id}`;
           if (user.photo_url) {
@@ -189,13 +187,8 @@
   window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
 }
   async function connectTonWallet() {
-const connectedWallet = await window.tonConnectUI.connected;
-    if (connectedWallet) {
-      alert(`Кошелек подключён: ${connectedWallet.account.address}`);
-    } else {
-      console.log("Ожидаем подключения TON...");
-    }
-    }
+    alert("Вы можете подключить свой криптокошелек TON для цифрового удостоверения.");
+  }
     </script>
   </body>
 </html>
