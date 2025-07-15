@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script type="module">
-      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js";
-
-      const tonConnectUI = new TonConnectUI({
-        manifestUrl: "https://yourdomain.com/tonconnect-manifest.json",
-        buttonRootId: "ton-connect-button"
-      });
-    </script>
     <style>
       :root {
         --bg-color: var(--tg-theme-bg-color, #fdfcf9);
@@ -108,8 +100,8 @@
     </div>
     <div id="deal-screen" class="hidden">
        <button class="button" onclick="openAIChat()">Создать чат с ИИ</button>
-       <button class="button" onclick="showUploadScreen()">Загрузить условия вручную</button>
-       <button class="button" onclick="showHomeScreen()">Назад</button>
+  <button class="button" onclick="showUploadScreen()">Загрузить условия вручную</button>
+      <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
     <div id="profile-screen" class="hidden">
       <div class="card">
@@ -117,14 +109,12 @@
         <div class="user-info">
           <p id="tg-name">Имя: —</p>
           <p id="tg-username">Username: —</p>
-          <p id="tg-id">ID: —</p>
+           <p id="tg-id">ID: —</p>
         </div>
       </div>
       <button class="button">Мои сделки</button>
       <button class="button">NFC-паспорт</button>
       <button class="button">TON Wallet</button>
-      <button class="button" onclick="connectTonWallet()">Подключить TON Wallet</button>
-      <div id="ton-connect-button"></div>
       <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
     <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 20px; text-align: left;">
@@ -158,9 +148,9 @@
         hideAll();
         const user = Telegram.WebApp.initDataUnsafe?.user;
         if (user) {
-          document.getElementById('tg-name').textContent = ${user.first_name || ''} ${user.last_name || ''}.trim();
-          document.getElementById('tg-username').textContent = @${user.username || 'нет'};
-          document.getElementById('tg-id').textContent = ID: ${user.id};
+          document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+          document.getElementById('tg-username').textContent = `@${user.username || 'нет'}`;
+           document.getElementById('tg-id').textContent = `ID: ${user.id}`;
           if (user.photo_url) {
             document.getElementById('tg-photo').src = user.photo_url;
           } else {
@@ -185,11 +175,8 @@
         document.getElementById('guide-screen').classList.add('hidden');
       }
       function openAIChat() {
-        window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
-      }
-      function connectTonWallet() {
-        alert("Вы можете подключить свой криптокошелек TON для цифрового удостоверения.");
-      }
+  window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
+}
     </script>
   </body>
 </html>
