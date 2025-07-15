@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script type="module">
-      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest";
-
-      const tonConnectUI = new TonConnectUI({
-        manifestUrl: "https://chestno.online/tonconnect-manifest.json",
-        buttonRootId: "ton-connect-button"
-      });
-      window.tonConnectUI = tonConnectUI ;
+<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script>
+  const tonConnectUI = new TonConnectUI({
+    manifestUrl: "https://chestno.online/tonconnect-manifest.json",
+    buttonRootId: "ton-connect-button"
+  });
+  window.tonConnectUI = tonConnectUI;
+</script>
     </script>
       <style>
       :root {
@@ -196,5 +196,11 @@ const connectedWallet = await window.tonConnectUI.connected;
     }
     }
     </script>
+    <script>
+  const tonConnectUI = new TonConnectUI.TonConnectUI({
+    manifestUrl: "https://chestno.online/tonconnect-manifest.json",
+    buttonRootId: "ton-connect-button"
+  });
+</script>
   </body>
 </html>
