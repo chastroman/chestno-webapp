@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
+    <script type="module">
+      import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js";
+
+      const tonConnectUI = new TonConnectUI({
+        manifestUrl: "https://chestno.online/tonconnect-manifest.json",
+        buttonRootId: "ton-connect-button"
+      });
+    </script>
+      <style>
       :root {
         --bg-color: var(--tg-theme-bg-color, #fdfcf9);
         --text-color: var(--tg-theme-text-color, #0f0f0f);
@@ -115,6 +123,8 @@
       <button class="button">Мои сделки</button>
       <button class="button">NFC-паспорт</button>
       <button class="button">TON Wallet</button>
+      <button class="button" onclick="connectTonWallet()">Подключить TON Wallet</button>
+      <div id="ton-connect-button"></div>
       <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
     <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 20px; text-align: left;">
@@ -177,6 +187,9 @@
       function openAIChat() {
   window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
 }
+  async function connectTonWallet() {
+    alert("Вы можете подключить свой криптокошелек TON для цифрового удостоверения.");
+  }
     </script>
   </body>
 </html>
