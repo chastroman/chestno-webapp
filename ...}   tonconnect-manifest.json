@@ -1,0 +1,7 @@
+{
+  "manifest_version": "1",
+  "name": "Честно",
+  "description": "Сервис безопасной сделки",
+  "url": "https://chestno.online",
+  "icons": ["https://chestno.online/logo512.png"]
+}
