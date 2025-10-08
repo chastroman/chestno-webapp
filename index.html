@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>честно</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-      <style>
+    <style>
       :root {
         --bg-color: var(--tg-theme-bg-color, #fdfcf9);
         --text-color: var(--tg-theme-text-color, #0f0f0f);
@@ -93,72 +93,103 @@
   </head>
   <body>
     <h1>честно</h1>
+
     <div id="home-screen">
       <button class="button" onclick="showDealScreen()">Создать сделку</button>
       <button class="button" onclick="showProfileScreen()">Личный кабинет</button>
       <button class="button" onclick="showGuideScreen()">Как это работает</button>
     </div>
+
     <div id="deal-screen" class="hidden">
-       <button class="button" onclick="openAIChat()">Создать чат с ИИ</button>
-  <button class="button" onclick="showUploadScreen()">Начать сделку</button>
-        <button class="button" onclick="showUploadScreen()">Завершить сделку</button>
-        <button class="button" onclick="showUploadScreen()">Сообщить о споре</button>
+      <button class="button" onclick="openAIChat()">Создать чат с ИИ</button>
+      <button class="button" onclick="showStartDealScreen()">Начать сделку</button>
+      <button class="button" onclick="completeDeal()">Завершить сделку</button>
+      <button class="button" onclick="reportDispute()">Сообщить о споре</button>
       <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
+
+    <div id="start-deal-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 20px;">
+      <h2 style="margin-bottom: 16px;">Начало сделки</h2>
+      <p style="font-size: 15px; margin-bottom: 8px;">Вставьте текст договорённости (можно скопировать из Telegram-чата)</p>
+      <textarea id="deal-text" class="input-field" rows="8" placeholder="Опишите условия сделки, стоимость, сроки..."></textarea>
+      <button class="button" onclick="submitDeal()">Подтвердить</button>
+      <button class="button" onclick="showDealScreen()">Назад</button>
+    </div>
+
     <div id="profile-screen" class="hidden">
       <div class="card">
         <img id="tg-photo" class="avatar" src="" alt="avatar" />
         <div class="user-info">
           <p id="tg-name">Имя: —</p>
           <p id="tg-username">Username: —</p>
-           <p id="tg-id">ID: —</p>
+          <p id="tg-id">ID: —</p>
         </div>
       </div>
       <button class="button">Мои сделки</button>
       <button class="button" onclick="showHomeScreen()">Назад</button>
     </div>
-    <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding:8px;">
-  <p style="font-size: 16px; margin-bottom: 24px; line-height: 1.6; text-align: center;">
-    Платформа для прямых договорённостей с гарантией выполнения и ИИ-арбитражем.
-  </p>
-  <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
-    <strong>Создание</strong><br/>
-    Вы создаёте группу с ИИ-ботом и добавляете второго участника. В чате обсуждаются условия и предмет договорённости. ИИ помогает сформулировать договор.
-  </div>
-  <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
-    <strong>Процесс</strong><br/>
-    После согласования условий вы переносите текст договора в мини-приложение или загружаете файл. Для заказчика формируется счёт. После оплаты деньги блокируются. Исполнитель приступает к работе.
-  </div>
-  <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
-    <strong>Завершение</strong><br/>
-    По завершении работы обе стороны подтверждают выполнение. Деньги перечисляются исполнителю.
-  </div>
-  <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
-    <strong>Спор</strong><br/>
-    В случае разногласий включается ИИ-арбитраж: анализируются условия сделки, переписка и документы. Решение о выплате принимает платформа.
-  </div>
-  <p style="font-size: 15px; color: #555; margin-top: 32px; text-align: center;">
-    «Честно» — для фрилансеров, самозанятых, бизнеса и всех, кто хочет работать честно и безопасно.
-  </p>
-  <div style="display: flex; justify-content: center; margin-top: 24px;">
-    <button class="button" onclick="showHomeScreen()">Назад</button>
-  </div>
-</div>
+
+    <div id="guide-screen" class="hidden" style="max-width: 600px; width: 100%; padding: 8px;">
+      <h2 style="text-align: center; margin-bottom: 24px;">Как работает «Честно»</h2>
+      <p style="font-size: 16px; margin-bottom: 24px; line-height: 1.6; text-align: center;">
+        Платформа для прямых договорённостей с гарантией выполнения и ИИ-арбитражем.
+      </p>
+      <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <strong>Создание</strong><br/>
+        Вы создаёте группу с ИИ-ботом и добавляете второго участника. В чате обсуждаются условия и предмет договорённости. ИИ помогает сформулировать договор.
+      </div>
+      <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <strong>Процесс</strong><br/>
+        После согласования условий вы переносите текст договора в мини-приложение или загружаете файл. Для заказчика формируется счёт. После оплаты деньги блокируются. Исполнитель приступает к работе.
+      </div>
+      <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <strong>Завершение</strong><br/>
+        По завершении работы обе стороны подтверждают выполнение. Деньги перечисляются исполнителю.
+      </div>
+      <div style="border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <strong>Спор</strong><br/>
+        В случае разногласий включается ИИ-арбитраж: анализируются условия сделки, переписка и документы. Решение о выплате принимает платформа.
+      </div>
+      <p style="font-size: 15px; color: #555; margin-top: 32px; text-align: center;">
+        «Честно» — для фрилансеров, самозанятых, бизнеса и всех, кто хочет работать честно и безопасно.
+      </p>
+      <div style="display: flex; justify-content: center; margin-top: 24px;">
+        <button class="button" onclick="showHomeScreen()">Назад</button>
+      </div>
+    </div>
+
     <div class="footer">chestno.online · сервис безопасной сделки</div>
+
     <script>
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
+
+      function hideAll() {
+        document.querySelectorAll('div[id$="-screen"]').forEach(div => div.classList.add('hidden'));
+      }
+
+      function showHomeScreen() {
+        hideAll();
+        document.getElementById('home-screen').classList.remove('hidden');
+      }
+
       function showDealScreen() {
         hideAll();
         document.getElementById('deal-screen').classList.remove('hidden');
       }
+
+      function showStartDealScreen() {
+        hideAll();
+        document.getElementById('start-deal-screen').classList.remove('hidden');
+      }
+
       function showProfileScreen() {
         hideAll();
         const user = Telegram.WebApp.initDataUnsafe?.user;
         if (user) {
           document.getElementById('tg-name').textContent = `${user.first_name || ''} ${user.last_name || ''}`.trim();
           document.getElementById('tg-username').textContent = `@${user.username || 'нет'}`;
-           document.getElementById('tg-id').textContent = `ID: ${user.id}`;
+          document.getElementById('tg-id').textContent = `ID: ${user.id}`;
           if (user.photo_url) {
             document.getElementById('tg-photo').src = user.photo_url;
           } else {
@@ -167,24 +198,44 @@
         }
         document.getElementById('profile-screen').classList.remove('hidden');
       }
+
       function showGuideScreen() {
         hideAll();
         document.getElementById('guide-screen').classList.remove('hidden');
       }
-      function showHomeScreen() {
-        hideAll();
-        document.getElementById('home-screen').classList.remove('hidden');
-        Telegram.WebApp.MainButton.hide();
-      }
-      function hideAll() {
-        document.getElementById('home-screen').classList.add('hidden');
-        document.getElementById('deal-screen').classList.add('hidden');
-        document.getElementById('profile-screen').classList.add('hidden');
-        document.getElementById('guide-screen').classList.add('hidden');
-      }
+
       function openAIChat() {
-  window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
-}
+        const limitKey = 'aiChatUsage';
+        const limit = 3;
+        const usage = parseInt(localStorage.getItem(limitKey) || '0');
+
+        if (usage >= limit) {
+          alert("Вы достигли лимита бесплатных запусков. Подключите подписку или ждите следующего дня.");
+          return;
+        }
+
+        localStorage.setItem(limitKey, usage + 1);
+        window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
+      }
+
+      function submitDeal() {
+        const text = document.getElementById('deal-text').value.trim();
+        if (text === "") {
+          alert("Пожалуйста, вставьте текст условий.");
+          return;
+        }
+        localStorage.setItem('lastDealText', text);
+        alert("Сделка создана!\n\n" + text);
+        showHomeScreen();
+      }
+
+      function completeDeal() {
+        alert("Сделка завершена. Деньги будут переведены исполнителю.");
+      }
+
+      function reportDispute() {
+        alert("Спор зафиксирован. ИИ-арбитраж будет подключён.");
+      }
     </script>
   </body>
 </html>
