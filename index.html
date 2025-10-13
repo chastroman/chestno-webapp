@@ -213,30 +213,29 @@
         window.open("https://t.me/chestno_ai_bot?startgroup=start", "_blank");
       }
       function submitDeal() {
-        const dealText = document.getElementById('deal-text').value.trim();
-        const amount = document.getElementById('deal-amount').value.trim();
-        const username = document.getElementById('deal-username').value.trim();
-        const user = Telegram.WebApp.initDataUnsafe?.user;
+  const dealText = document.getElementById('deal-text').value.trim();
+  const amount = document.getElementById('deal-amount').value.trim();
+  const username = document.getElementById('deal-username').value.trim();
+  const user = Telegram.WebApp.initDataUnsafe?.user;
 
-        if (!dealText || !amount || !username) {
-          alert("Пожалуйста, заполните все поля.");
-          return;
-        }
+  if (!dealText || !amount || !username) {
+    alert("Пожалуйста, заполните все поля.");
+    return;
+  }
 
-        const summary = `Сделка создана!\n\nУчастники:\n• Вы: @${user?.username || 'неизвестно'} (ID: ${user?.id})\n• Второй участник: ${username}\n\nУсловия:\n${dealText}\n\nСумма: ${amount} ₽`;
-        const serverUrl = "server-production-4e29.up.railway.app";
+  const serverUrl = "https://server-production-4e29.up.railway.app";
 
-fetch(serverUrl, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    user_id: user?.id,
-    username: user?.username,
-    second_party: username,
-    deal_text: dealText,
-    amount: amount
+  fetch(serverUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: user?.id,
+      username: user?.username,
+      second_party: username,
+      deal_text: dealText,
+      amount: amount
+    })
   })
-})
   .then(res => res.json())
   .then(data => {
     alert("✅ Сделка успешно отправлена на сервер!");
@@ -246,8 +245,7 @@ fetch(serverUrl, {
     alert("❌ Ошибка при отправке сделки");
     console.error(err);
   });
-        showHomeScreen();
-      }
+}
     </script>
   </body>
 </html>
